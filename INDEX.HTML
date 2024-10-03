@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bizcals - Business Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Existing body styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: silver;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 450px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            color: silver;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+
+        select, button, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: silver;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            color: silver;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        footer a {
+            color: silver;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Falling money animation */
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sway {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(100px);
+            }
+        }
+
+        .money {
+            position: fixed;
+            top: 0;
+            font-size: 24px;
+            color: green;
+            opacity: 0.8;
+            animation: fall 5s linear infinite, sway 3s ease-in-out infinite;
+            z-index: 9999;
+        }
+
+        /* Styling for each falling money item */
+        .money:nth-child(1) { left: 10%; animation-duration: 6s; }
+        .money:nth-child(2) { left: 20%; animation-duration: 7s; }
+        .money:nth-child(3) { left: 30%; animation-duration: 4s; }
+        .money:nth-child(4) { left: 40%; animation-duration: 5s; }
+        .money:nth-child(5) { left: 50%; animation-duration: 8s; }
+        .money:nth-child(6) { left: 60%; animation-duration: 6.5s; }
+        .money:nth-child(7) { left: 70%; animation-duration: 5.5s; }
+        .money:nth-child(8) { left: 80%; animation-duration: 7.5s; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bizcals - Business Calculator</h1>
+        <label for="calculation">Select Calculation:</label>
+        <select id="calculation">
+            <option value="">--Select--</option>
+            <option value="gross_profit_margin">Gross Profit Margin</option>
+            <option value="net_profit_margin">Net Profit Margin</option>
+            <option value="operating_profit_margin">Operating Profit Margin</option>
+            <option value="roi">Return on Investment (ROI)</option>
+            <option value="break_even">Break-Even Point</option>
+            <option value="current_ratio">Current Ratio</option>
+            <option value="quick_ratio">Quick Ratio</option>
+            <option value="debt_to_equity">Debt to Equity Ratio</option>
+            <option value="working_capital">Working Capital</option>
+            <option value="roe">Return on Equity (ROE)</option>
+            <option value="inventory_turnover">Inventory Turnover Ratio</option>
+            <option value="debt_ratio">Debt Ratio</option>
+            <option value="pe_ratio">Price-to-Earnings (P/E) Ratio</option>
+        </select>
+        <div id="inputFields"></div>
+        <button id="calculateBtn">Calculate</button>
+        <button id="resetBtn">Reset</button>
+        
+        <div id="result"></div>
+        <canvas id="resultChart" width="500" height="400"></canvas>
+        
+        <footer>
+            <p>Developed by <a href="https://www.linkedin.com/in/baalaji-mohan-kumar-512786168/" target="_blank">Baalaji Mohan Kumar</a></p>
+        </footer>
+    </div>
+
+    <!-- Falling money elements -->
+    <div class="money">$</div>
+    <div class="money">$</div>
+    <div class="money">$</div>
+    <div class="money">$</div>
+    <div class="money">$</div>
+    <div class="money">$</div>
+    <div class="money">$</div>
+    <div class="money">$</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
